@@ -1,5 +1,5 @@
 // Import React dependencies.
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 // Import the Slate editor factory.
 import { createEditor } from "slate";
 
@@ -32,14 +32,14 @@ import {
   Looks6,
   LooksOne,
   LooksTwo,
-  Search,
+  // Search,
 } from "@styled-icons/material";
 
 import {
   EditablePlugins,
   pipe,
-  decorateSearchHighlight,
-  ToolbarSearchHighlight,
+  // decorateSearchHighlight,
+  // ToolbarSearchHighlight,
   HeadingToolbar,
   ToolbarElement,
   ToolbarList,
@@ -71,7 +71,7 @@ import {
   CodePlugin,
   ItalicPlugin,
   HighlightPlugin,
-  SearchHighlightPlugin,
+  // SearchHighlightPlugin,
   UnderlinePlugin,
   StrikethroughPlugin,
   SubscriptPlugin,
@@ -113,116 +113,118 @@ import {
   optionsResetBlockTypes,
 } from "../utils/initialValues";
 
-const initialValue: Node[] = [
-  ...initialValueForcedLayout,
-  ...initialValueBasicMarks,
-  ...initialValueHighlight,
-  ...initialValueBasicElements,
-  ...initialValueList,
-  ...initialValueTables,
-  ...initialValueLinks,
-  ...initialValueMentions,
-  ...initialValueImages,
-  // ...initialValueEmbeds,
-  ...initialValueAutoformat,
-  ...initialValueSoftBreak,
-  ...initialValueExitBreak,
-  ...initialValuePasteHtml,
-];
-
-const plugins: any[] = [];
-
-plugins.push(ParagraphPlugin(options));
-plugins.push(BlockquotePlugin(options));
-plugins.push(TodoListPlugin(options));
-plugins.push(HeadingPlugin(options));
-plugins.push(ImagePlugin(options));
-plugins.push(LinkPlugin(options));
-plugins.push(ListPlugin(options));
-plugins.push(MentionPlugin(options));
-plugins.push(TablePlugin(options));
-plugins.push(MediaEmbedPlugin(options));
-plugins.push(CodeBlockPlugin(options));
-plugins.push(AlignPlugin(options));
-plugins.push(BoldPlugin(options));
-plugins.push(CodePlugin(options));
-plugins.push(ItalicPlugin(options));
-plugins.push(HighlightPlugin(options));
-plugins.push(SearchHighlightPlugin(options));
-plugins.push(UnderlinePlugin(options));
-plugins.push(StrikethroughPlugin(options));
-plugins.push(SubscriptPlugin(options));
-plugins.push(SuperscriptPlugin(options));
-plugins.push(ResetBlockTypePlugin(optionsResetBlockTypes));
-plugins.push(
-  SoftBreakPlugin({
-    rules: [
-      { hotkey: "shift+enter" },
-      {
-        hotkey: "enter",
-        query: {
-          allow: [
-            options.code_block.type,
-            options.blockquote.type,
-            options.td.type,
-          ],
-        },
-      },
-    ],
-  })
-);
-plugins.push(
-  ExitBreakPlugin({
-    rules: [
-      {
-        hotkey: "mod+enter",
-      },
-      {
-        hotkey: "mod+shift+enter",
-        before: true,
-      },
-      {
-        hotkey: "enter",
-        query: {
-          start: true,
-          end: true,
-          allow: headingTypes,
-        },
-      },
-    ],
-  })
-);
-
-const withPlugins = [
-  withReact,
-  withHistory,
-  withTable(options),
-  withLink(),
-  withList(options),
-  withDeserializeHTML({ plugins }),
-  withMarks(),
-  withImageUpload(),
-  withToggleType({ defaultType: options.p.type }),
-  withAutoformat({ rules: autoformatRules }),
-  withTransforms(),
-  withNormalizeTypes({
-    rules: [{ path: [0, 0], strictType: options.h1.type }],
-  }),
-  withTrailingNode({ type: options.p.type, level: 1 }),
-  withInlineVoid({ plugins }),
-] as const;
-
 const EditorPane = () => {
   const decorate: any = [];
   const onKeyDown: any = [];
 
+  let initialValue: Node[] = [
+    ...initialValueForcedLayout,
+    ...initialValueBasicMarks,
+    ...initialValueHighlight,
+    ...initialValueBasicElements,
+    ...initialValueList,
+    ...initialValueTables,
+    ...initialValueLinks,
+    ...initialValueMentions,
+    ...initialValueImages,
+    // ...initialValueEmbeds,
+    ...initialValueAutoformat,
+    ...initialValueSoftBreak,
+    ...initialValueExitBreak,
+    ...initialValuePasteHtml,
+  ];
+
   const [value, setValue] = useState(initialValue);
+
+  const plugins: any[] = [];
+
+  useEffect(() => {
+    plugins.push(ParagraphPlugin(options));
+    plugins.push(BlockquotePlugin(options));
+    plugins.push(TodoListPlugin(options));
+    plugins.push(HeadingPlugin(options));
+    plugins.push(ImagePlugin(options));
+    plugins.push(LinkPlugin(options));
+    plugins.push(ListPlugin(options));
+    plugins.push(MentionPlugin(options));
+    plugins.push(TablePlugin(options));
+    plugins.push(MediaEmbedPlugin(options));
+    plugins.push(CodeBlockPlugin(options));
+    plugins.push(AlignPlugin(options));
+    plugins.push(BoldPlugin(options));
+    plugins.push(CodePlugin(options));
+    plugins.push(ItalicPlugin(options));
+    plugins.push(HighlightPlugin(options));
+    // plugins.push(SearchHighlightPlugin(options));
+    plugins.push(UnderlinePlugin(options));
+    plugins.push(StrikethroughPlugin(options));
+    plugins.push(SubscriptPlugin(options));
+    plugins.push(SuperscriptPlugin(options));
+    plugins.push(ResetBlockTypePlugin(optionsResetBlockTypes));
+    plugins.push(
+      SoftBreakPlugin({
+        rules: [
+          { hotkey: "shift+enter" },
+          {
+            hotkey: "enter",
+            query: {
+              allow: [
+                options.code_block.type,
+                options.blockquote.type,
+                options.td.type,
+              ],
+            },
+          },
+        ],
+      })
+    );
+    plugins.push(
+      ExitBreakPlugin({
+        rules: [
+          {
+            hotkey: "mod+enter",
+          },
+          {
+            hotkey: "mod+shift+enter",
+            before: true,
+          },
+          {
+            hotkey: "enter",
+            query: {
+              start: true,
+              end: true,
+              allow: headingTypes,
+            },
+          },
+        ],
+      })
+    );
+  }, []);
+
+  const withPlugins = [
+    withReact,
+    withHistory,
+    withTable(options),
+    withLink(),
+    withList(options),
+    // withDeserializeHTML({ plugins }),
+    withMarks(),
+    withImageUpload(),
+    withToggleType({ defaultType: options.p.type }),
+    withAutoformat({ rules: autoformatRules }),
+    withTransforms(),
+    withNormalizeTypes({
+      rules: [{ path: [0, 0], strictType: options.h1.type }],
+    }),
+    withTrailingNode({ type: options.p.type, level: 1 }),
+    // withInlineVoid({ plugins }),
+  ] as const;
 
   const editor = useMemo(() => pipe(createEditor(), ...withPlugins), []);
 
-  const [search, setSearchHighlight] = useState("");
+  // const [search, setSearchHighlight] = useState("");
 
-  decorate.push(decorateSearchHighlight({ search }));
+  // decorate.push(decorateSearchHighlight({ search }));
 
   return (
     <Slate
@@ -230,7 +232,7 @@ const EditorPane = () => {
       value={value}
       onChange={(newValue) => setValue(newValue)}
     >
-      <ToolbarSearchHighlight icon={Search} setSearch={setSearchHighlight} />
+      {/* <ToolbarSearchHighlight icon={Search} setSearch={setSearchHighlight} /> */}
       <HeadingToolbar styles={{ root: { flexWrap: "wrap" } }}>
         {/* Elements */}
         <ToolbarElement type={options.h1.type} icon={<LooksOne />} />
@@ -304,8 +306,8 @@ const EditorPane = () => {
       <EditablePlugins
         plugins={plugins}
         decorate={decorate}
-        decorateDeps={[search]}
-        renderLeafDeps={[search]}
+        // decorateDeps={[search]}
+        // renderLeafDeps={[search]}
         onKeyDown={onKeyDown}
         placeholder="Enter some plain text..."
       />

@@ -1,7 +1,13 @@
 import Link from "next/link";
 import Layout from "../components/Layout";
-import EditorPane from "../components/EditorPane";
+import QuillEditor from "../components/QuillEditor";
+import dynamic from "next/dynamic";
 // import Tree from "../components/Tree";
+
+const SlateNoSSRWrapper = dynamic(import("../components/EditorPane"), {
+  ssr: false,
+  loading: () => <p>Loading ...</p>,
+});
 
 const IndexPage = () => (
   <Layout title="Home | Next.js + TypeScript Example">
@@ -17,7 +23,9 @@ const IndexPage = () => (
       <div className="w-full mx-4">
         <p className="bg-blue-200 text-center">Note 1</p>
         <div className="border-gray-400 border-2 p-4 shadow-xl">
-          <EditorPane />
+          {/* <EditorPane /> */}
+          <SlateNoSSRWrapper />
+          {/* <QuillEditor /> */}
         </div>
       </div>
     </div>

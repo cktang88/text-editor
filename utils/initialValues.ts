@@ -33,8 +33,7 @@ import {
   SlateDocumentDescendant,
   SlateDocumentFragment,
 } from "@udecode/slate-plugins";
-import faker from "faker";
-import { Descendant, Text } from "slate";
+import { Text } from "slate";
 
 export const headingTypes = [
   ELEMENT_H1,
@@ -255,21 +254,6 @@ export const initialValueBalloonToolbar: SlateDocument = [
 
 const HEADINGS = 100;
 const PARAGRAPHS = 7;
-export const initialValueHugeDocument: Descendant[] = [{ children: [] }];
-
-for (let h = 0; h < HEADINGS; h++) {
-  (initialValueHugeDocument[0] as any).children.push({
-    type: options.h1.type,
-    children: [{ text: faker.lorem.sentence() }],
-  });
-
-  for (let p = 0; p < PARAGRAPHS; p++) {
-    (initialValueHugeDocument[0] as any).children.push({
-      type: options.p.type,
-      children: [{ text: faker.lorem.paragraph() }],
-    });
-  }
-}
 
 export const initialValueImages: SlateDocument = [
   {
