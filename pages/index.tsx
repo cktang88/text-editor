@@ -1,18 +1,28 @@
 import Link from "next/link";
 import Layout from "../components/Layout";
 import EditorPane from "../components/EditorPane";
+// import Tree from "../components/Tree";
 
 const IndexPage = () => (
   <Layout title="Home | Next.js + TypeScript Example">
-    <h1 className="">Text editor1</h1>
     <div className="container mx-auto">
-      <h1 className="text-lg text-center m-4">TailwindUI/Next.js</h1>
-      <p className="bg-green-600">
-        This is a test of the tailwind next integration.
-      </p>
+      <h1 className="text-3lg text-center m-4">Text Editor</h1>
     </div>
-    ;
-    <EditorPane />
+    <div className="flex flex-row">
+      <div className="w-64 mx-4">
+        <p className="bg-green-200 text-center">Notes</p>
+        Tree view
+        {/* <Tree /> */}
+      </div>
+      <div className="w-full mx-4">
+        <p className="bg-blue-200 text-center">Note 1</p>
+        <div className="border-gray-400 border-2 p-4 shadow-xl">
+          <EditorPane />
+        </div>
+      </div>
+    </div>
+
+    <br></br>
     <p>
       <Link href="/about">
         <a>About</a>
