@@ -1,3 +1,4 @@
+/* strips all styles, including headers, lists, etc. https://tailwindcss.com/docs/preflight#headings-are-unstyled */
 @tailwind base;
 
 /* add back some default styles */
