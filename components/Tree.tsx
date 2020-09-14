@@ -1,67 +1,59 @@
-import { FixedSizeTree as Tree } from "react-vtree";
-import React, { useEffect, useMemo, useState } from "react";
+import { FixedSizeTree } from "react-vtree";
+import { useState } from "react";
 
-const _data = {
-  name: "root",
-  id: 1,
-  toggled: true,
+interface NodeType {
+  name: string;
+  children?: NodeType[];
+  isOpen?: boolean;
+}
+
+const tree: NodeType = {
+  name: "Root #1",
+  isOpen: true,
   children: [
     {
-      name: "example",
-      children: [
-        { name: "app" },
-        { name: "data" },
-        { name: "index" },
-        { name: "styles" },
-        { name: "webpack" },
-      ],
-    },
-    // {
-    //   name: "node_modules",
-    //   loading: true,
-    //   children: [],
-    // },
-    {
-      name: "src",
-      children: [
-        {
-          name: "components",
-          children: [
-            { name: "decorators" },
-            { name: "treebeard" },
-            { name: "asdfasdf" },
-            { name: "ererererer" },
-          ],
-        },
-        { name: "index" },
-      ],
+      children: [{ name: "Child #2" }, { name: "Child #3" }],
+      name: "Child #1",
     },
     {
-      name: "themes",
-      children: [{ name: "animations" }, { name: "default" }],
+      children: [{ name: "Child #5" }],
+      name: "Child #4",
+      isOpen: true,
     },
-    { name: "file1" },
-    { name: "file2" },
-    { name: "file3" },
   ],
 };
-const Tree = () => {
-  const [data, setData] = useState(_data);
-  const [cursor, setCursor] = useState(false);
 
-  const onToggle = (node, toggled) => {
-    if (cursor) {
-      cursor.active = false;
-    }
-    node.active = true;
-    if (node.children) {
-      node.toggled = toggled;
-    }
-    setCursor(node);
-    setData(Object.assign({}, data));
-  };
-
-  return <FixedSizeTree data={data} onToggle={onToggle} />;
+const Node = ({ children, isOpen, name }: NodeType) => {
+  const [_isOpen, toggleOpen] = useState(isOpen);
+  return (
+    <>
+      <li>
+        {children && (
+          <button
+            type="button"
+            className="bg-blue-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            onClick={(e) => toggleOpen(!_isOpen)}
+          >
+            {_isOpen ? "-" : "+"}
+            {name}
+          </button>
+        )}
+        {_isOpen && (
+          <ul className="list-inside list-disc">
+            {(children || []).map((e) => (
+              <Node {...e} />
+            ))}
+          </ul>
+        )}
+      </li>
+    </>
+  );
 };
+
+const Tree = () => (
+  <ul className="list-inside list-disc">
+    <Node {...tree} />
+  </ul>
+);
 
 export default Tree;
