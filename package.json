@@ -16,6 +16,7 @@
     "react-quill": "^1.3.5",
     "react-vtree": "^2.0.2",
     "react-window": "^1.8.5",
+    "roosterjs": "^7.16.0",
     "slate": "^0.58.4",
     "slate-history": "^0.58.4",
     "slate-hyperscript": "^0.58.4",

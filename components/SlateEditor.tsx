@@ -207,7 +207,7 @@ const EditorPane = () => {
     withTable(options),
     withLink(),
     withList(options),
-    // withDeserializeHTML({ plugins }),
+    withDeserializeHTML({ plugins }),
     withMarks(),
     withImageUpload(),
     withToggleType({ defaultType: options.p.type }),
@@ -217,7 +217,7 @@ const EditorPane = () => {
       rules: [{ path: [0, 0], strictType: options.h1.type }],
     }),
     withTrailingNode({ type: options.p.type, level: 1 }),
-    // withInlineVoid({ plugins }),
+    withInlineVoid({ plugins }),
   ] as const;
 
   const editor = useMemo(() => pipe(createEditor(), ...withPlugins), []);
