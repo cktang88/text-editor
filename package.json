@@ -8,6 +8,9 @@
     "type-check": "tsc"
   },
   "dependencies": {
+    "@tiptap/core": "^2.0.0-beta.55",
+    "@tiptap/react": "^2.0.0-beta.33",
+    "@tiptap/starter-kit": "^2.0.0-beta.52",
     "next": "latest",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
