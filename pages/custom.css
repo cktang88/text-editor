@@ -1,0 +1,9 @@
+body {
+  /* font: var(--desktop-font-size) / 2 -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol"; */
+  font-size: medium;
+}
+p {
+  margin: 0.8rem 0;
+}

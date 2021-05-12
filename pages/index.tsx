@@ -18,27 +18,33 @@ const IndexPage = () => {
     return null;
   }
   const padStyle = {
-    padding: "20px",
-    border: "1px solid gray",
-    minHeight: "50%",
+    margin: 10,
+    padding: 10,
+    border: "1px solid #ccc",
+    // minHeight: "50%",
   };
   return (
     <Layout title="Text Editor">
-      <Fixed height={900}>
+      <Fixed height={1200}>
         <Top size={25}>
           <h1>text editor 👋</h1>
         </Top>
-        <LeftResizable size="20%" minimumSize={200} maximumSize={500}>
+        <LeftResizable
+          size="20%"
+          minimumSize={200}
+          maximumSize={500}
+          scrollable={true}
+        >
           <div style={{ margin: "20px" }}>
             <FileBrowser />
           </div>
         </LeftResizable>
-        <Fill>
+        <Fill scrollable={true}>
           <div style={padStyle}>
             <Tiptap />
           </div>
         </Fill>
-        <RightResizable size="40%" minimumSize={300}>
+        <RightResizable size="40%" minimumSize={300} scrollable={true}>
           <div style={padStyle}>
             <Tiptap />
           </div>
