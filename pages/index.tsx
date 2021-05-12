@@ -28,7 +28,7 @@ const IndexPage = () => {
         <Top size={25}>
           <h1>text editor 👋</h1>
         </Top>
-        <LeftResizable size="20%">
+        <LeftResizable size="20%" minimumSize={200} maximumSize={500}>
           <div style={{ margin: "20px" }}>
             <FileBrowser />
           </div>
@@ -38,7 +38,7 @@ const IndexPage = () => {
             <Tiptap />
           </div>
         </Fill>
-        <RightResizable size="40%">
+        <RightResizable size="40%" minimumSize={300}>
           <div style={padStyle}>
             <Tiptap />
           </div>

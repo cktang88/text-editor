@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Treebeard, TreeNode } from "react-treebeard";
+import { Treebeard, TreeNode, TreeTheme } from "react-treebeard";
 
 const rawData = {
   name: "root",
@@ -21,6 +21,8 @@ const rawData = {
           name: "nested parent",
           children: [{ name: "nested child 1" }, { name: "nested child 2" }],
         },
+        { name: "child 1a" },
+        { name: "child 1b" },
       ],
     },
   ],
@@ -42,6 +44,93 @@ const FileBrowser = () => {
     setData(Object.assign({}, data));
   };
 
-  return <Treebeard data={data} onToggle={onToggle} />;
+  return (
+    <Treebeard
+      data={data}
+      onToggle={onToggle}
+      animations={false} // turn off animations for faster responsiveness
+      style={styleOverride}
+    />
+  );
 };
+
+const INDENT = 20;
+const styleOverride: TreeTheme = {
+  tree: {
+    base: {
+      listStyle: "none",
+      backgroundColor: "white",
+      margin: 0,
+      padding: 0,
+      color: "black",
+      fontFamily: "lucida grande ,tahoma,verdana,arial,sans-serif",
+      fontSize: "14px",
+    },
+    node: {
+      base: {
+        position: "relative",
+      },
+      link: {
+        cursor: "pointer",
+        position: "relative",
+        // padding: `0px ${INDENT}px`,
+        display: "block",
+      },
+      activeLink: {
+        background: "#cae2eb",
+      },
+      toggle: {
+        base: {
+          position: "relative",
+          display: "inline-block",
+          verticalAlign: "top",
+          //   marginLeft: `-${INDENT}px`,
+          height: "24px",
+          width: "24px",
+        },
+        wrapper: {
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          margin: "-7px 0 0 -7px",
+          height: "14px",
+        },
+        height: 14,
+        width: 14,
+        arrow: {
+          fill: "black",
+          strokeWidth: 0,
+        },
+      },
+      header: {
+        base: {
+          display: "inline-block",
+          verticalAlign: "top",
+          color: "black",
+        },
+        connector: {
+          width: "2px",
+          height: "12px",
+          borderLeft: "solid 2px black",
+          borderBottom: "solid 2px black",
+          position: "absolute",
+          top: "0px",
+          left: "-21px",
+        },
+        title: {
+          lineHeight: "24px",
+          verticalAlign: "middle",
+        },
+      },
+      subtree: {
+        listStyle: "none",
+        paddingLeft: `${INDENT}px`,
+      },
+      loading: {
+        color: "#36ab16",
+      },
+    },
+  },
+};
+
 export default FileBrowser;
