@@ -1,0 +1,29 @@
+/* strips all styles, including headers, lists, etc. https://tailwindcss.com/docs/preflight#headings-are-unstyled */
+@tailwind base;
+
+/* Write your own custom base styles here */
+/* add back some default styles */
+h1 {
+  @apply text-2xl;
+}
+h2 {
+  @apply text-xl;
+}
+h3 {
+  @apply text-lg;
+}
+a {
+  @apply text-blue-600 underline;
+}
+
+/* Start purging... */
+@tailwind components;
+/* Stop purging. */
+
+/* Write you own custom component styles here */
+
+/* Start purging... */
+@tailwind utilities;
+/* Stop purging. */
+
+/* Your own custom utilities */
