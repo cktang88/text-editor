@@ -1,14 +1,14 @@
 # text-editor
 
-Essentials:
+Libs:
 
 - https://github.com/ueberdosis/tiptap core
 - react-treebeard --> TODO: need to replace lol
+- https://github.com/nathancahill/split - for resizing
 - Next.js 12 with TypeScript https://github.com/vercel/next.js/tree/canary/examples/with-typescript
 
 Extra stuff:
 
-- https://github.com/aeagle/react-spaces? flexbox responsiveness
 - https://github.com/nextapps-de/flexsearch for search?
 
 - ~~maybe tooltips w/ https://github.com/atomiks/tippyjs-react~~
