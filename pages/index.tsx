@@ -1,15 +1,16 @@
 import Link from "next/link";
 import Layout from "../components/Layout";
 import Tiptap from "../components/TipTap";
-import {
-  // ViewPort, // TODO: use
-  LeftResizable,
-  RightResizable,
-  Top,
-  Bottom,
-  Fixed,
-  Fill,
-} from "react-spaces";
+// import {
+//   // ViewPort, // TODO: use
+//   LeftResizable,
+//   RightResizable,
+//   Top,
+//   Bottom,
+//   Fixed,
+//   Fill,
+// } from "react-spaces";
+import Split from "react-split";
 import FileBrowser from "../components/FileBrowser";
 
 const IndexPage = () => {
@@ -18,45 +19,37 @@ const IndexPage = () => {
     return null;
   }
   const padStyle = {
-    margin: 10,
-    padding: 10,
+    // margin: 10,
+    margin: 0,
+    padding: 20,
     border: "1px solid #ccc",
     // minHeight: "50%",
   };
   return (
     <Layout title="Text Editor">
-      <Fixed height={1200}>
-        <Top size={25}>
-          <h1>text editor 👋</h1>
-        </Top>
-        <LeftResizable
-          size="20%"
-          minimumSize={200}
-          maximumSize={500}
-          scrollable={true}
-        >
-          <div style={{ margin: "20px" }}>
-            <FileBrowser />
-          </div>
-        </LeftResizable>
-        <Fill scrollable={true}>
-          <div style={padStyle}>
-            <Tiptap />
-          </div>
-        </Fill>
-        <RightResizable size="40%" minimumSize={300} scrollable={true}>
-          <div style={padStyle}>
-            <Tiptap />
-          </div>
-        </RightResizable>
-        <Bottom size={100}>
-          <p>
-            <Link href="/about">
-              <a>About</a>
-            </Link>
-          </p>
-        </Bottom>
-      </Fixed>
+      <h1>text editor</h1>
+      <Split direction="horizontal" style={{ display: "flex" }} gutterSize={20}>
+        <div style={{ margin: "20px" }}>
+          <FileBrowser />
+        </div>
+        <div style={padStyle}>
+          <Tiptap />
+        </div>
+        <div style={padStyle}>
+          <Tiptap />
+        </div>
+        <div style={padStyle}>
+          <Tiptap />
+        </div>
+        <div style={padStyle}>
+          <p>Add new</p>
+        </div>
+      </Split>
+      <p>
+        <Link href="/about">
+          <a>About</a>
+        </Link>
+      </p>
     </Layout>
   );
 };

@@ -7,3 +7,7 @@ body {
 p {
   margin: 0.8rem 0;
 }
+ul,
+ol {
+  margin: 0 0;
+}
