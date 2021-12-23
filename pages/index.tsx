@@ -1,15 +1,6 @@
 import Link from "next/link";
 import Layout from "../components/Layout";
 import Tiptap from "../components/TipTap";
-// import {
-//   // ViewPort, // TODO: use
-//   LeftResizable,
-//   RightResizable,
-//   Top,
-//   Bottom,
-//   Fixed,
-//   Fill,
-// } from "react-spaces";
 import Split from "react-split";
 import FileBrowser from "../components/FileBrowser";
 
