@@ -2,12 +2,15 @@ body {
   /* font: var(--desktop-font-size) / 2 -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol"; */
-  font-size: medium;
+  font-size: 14px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 p {
-  margin: 0.8rem 0;
+  margin: 0.2rem;
 }
 ul,
 ol {
-  margin: 0 0;
+  margin: 0;
+  padding-left: 2rem;
 }

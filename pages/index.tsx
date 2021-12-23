@@ -21,30 +21,35 @@ const IndexPage = () => {
   const padStyle = {
     // margin: 10,
     margin: 0,
-    padding: 20,
-    border: "1px solid #ccc",
+    width: "680px",
+    // padding: 20,
+    // border: "1px solid #ccc",
     // minHeight: "50%",
   };
   return (
     <Layout title="Text Editor">
-      <h1>text editor</h1>
-      <Split direction="horizontal" style={{ display: "flex" }} gutterSize={20}>
-        <div style={{ margin: "20px" }}>
+      <div style={{ display: "flex", marginRight: 50 }}>
+        <div style={{ margin: "20px", width: "300px" }}>
+          <h2>text editor</h2>
           <FileBrowser />
         </div>
-        <div style={padStyle}>
-          <Tiptap />
-        </div>
-        <div style={padStyle}>
-          <Tiptap />
-        </div>
-        <div style={padStyle}>
-          <Tiptap />
-        </div>
-        <div style={padStyle}>
-          <p>Add new</p>
-        </div>
-      </Split>
+        <Split
+          direction="horizontal"
+          style={{ display: "flex" }}
+          gutterSize={50}
+          minSize={250}
+        >
+          <div style={padStyle}>
+            <Tiptap />
+          </div>
+          <div style={padStyle}>
+            <Tiptap />
+          </div>
+          <div style={padStyle}>
+            <Tiptap />
+          </div>
+        </Split>
+      </div>
       <p>
         <Link href="/about">
           <a>About</a>
