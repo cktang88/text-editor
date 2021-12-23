@@ -1,22 +1,23 @@
-import clientPromise from "../../../db";
 import { NextApiRequest, NextApiResponse } from "next";
+import { paneCollection } from "../../../db/collections";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   // TODO: sanitize + validate (maybe Zod?)
   const { routeId, rawHTML } = req.body;
+  if (!routeId || !rawHTML) {
+    res.status(400).json({ error: "Invalid input format." });
+    return;
+  }
 
-  const client = await clientPromise;
-  const db = client.db();
-  const col = db.collection("panes");
+  const col = await paneCollection();
 
   const nowTs = Date.now();
   await col.insertOne({
     routeId,
-    created_at: nowTs,
-    updated_at: nowTs,
+    createdAt: nowTs,
+    updatedAt: nowTs,
     rawHTML,
   });
-  console.log("Upserted " + routeId);
 
   res.status(200).json({});
 };
