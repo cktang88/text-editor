@@ -5,6 +5,7 @@ import Split from "react-split";
 import FileBrowser from "../components/FileBrowser";
 
 const IndexPage = () => {
+  const { panes, loading, error } = usePanes();
   // fix for "document is not defined" error for Next.js SSR
   if (typeof window === "undefined") {
     return null;
