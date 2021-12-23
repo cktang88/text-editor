@@ -12,7 +12,8 @@ const IndexPage = () => {
   const padStyle = {
     // margin: 10,
     margin: 0,
-    width: "680px",
+    minWidth: 300,
+    // width: "680px",
     // padding: 20,
     // border: "1px solid #ccc",
     // minHeight: "50%",
