@@ -3,8 +3,8 @@ import { folderCollection } from "../../../db/collections";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   // TODO: sanitize + validate (maybe Zod?)
-  const { routeName, parentRouteId } = req.body;
-  if (!routeName) {
+  const { name, parentId } = req.body;
+  if (!name) {
     res.status(400).json({ error: "Invalid input format." });
     return;
   }
@@ -13,8 +13,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   const nowTs = Date.now();
   await col.insertOne({
-    name: routeName,
-    parent: parentRouteId,
+    name: name,
+    parentId: parentId,
     createdAt: nowTs,
     updatedAt: nowTs,
   });
