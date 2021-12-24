@@ -70,10 +70,25 @@ const PaneComponent = ({ paneData }: { paneData: Pane }) => {
 
   return (
     <>
-      <em style={{ fontSize: ".8em" }}>
-        {paneData._id} (last mod {new Date(paneData.updatedAt).toLocaleString()}
-        )
-      </em>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+      >
+        <em style={{ fontSize: ".8em" }}>
+          last mod {new Date(paneData.updatedAt).toLocaleString()}
+        </em>
+        <button
+          onClick={() =>
+            editor?.chain().focus().clearNodes().unsetAllMarks().run()
+          }
+          className={editor?.isActive("paragraph") ? "is-active" : ""}
+        >
+          Clear format
+        </button>
+      </div>
       <EditorContent editor={editor} />
     </>
   );

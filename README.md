@@ -11,25 +11,28 @@ Libs:
 
 Extra stuff:
 
-- https://github.com/nextapps-de/flexsearch for search?
-
-- ~~maybe tooltips w/ https://github.com/atomiks/tippyjs-react~~
-
 - https://github.com/downshift-js/downshift for autocomplete?
 
 ## Spec
 
 - absolutely need full-text-search across all notes inner content, in addition to searching titles
 
-  - store text in mongoDB, use mongoDB FTS?
+  - mongoDB FTS? or https://github.com/nextapps-de/flexsearch
 
 - requirements for text editor
   - nested lists
-  - paste URLs
-  - multiple resizable-width panes
-  - preferably hide taskbar, one master taskbar + popups?
-  - paste images
-  - sync to a db somewhere
+  - paste URLs, images
+  - multiple panes
+  - sync to db
+
+## Todos
+
+- add pane
+- add folder
+- move folders around
+- fix folder display
+- add full-text search
+- add better formatting?
 
 ## Thoughts
 
