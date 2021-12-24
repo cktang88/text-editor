@@ -26,15 +26,16 @@ const FileBrowser: FC<{ onFolderChange: (_: string) => void }> = ({
       toggled: true,
     });
 
-    // 1. add roots
+    // recursion :)
+    const getChildren = (allFolders: Folder[], myId: string): TreeNode[] =>
+      allFolders
+        .filter((e) => e.parentId == myId)
+        .map((e) => makeNode(e, getChildren(folders, e._id!)));
+
     const roots: TreeNode[] = (folders ?? [])
       .filter((f) => !f.parentId)
       .map((f) => {
-        // only two levels down, quick hack lol
-        const children = folders
-          .filter((e) => e.parentId == f._id)
-          .map((e) => makeNode(e));
-        return makeNode(f, children);
+        return makeNode(f, getChildren(folders, f._id!));
       });
     setData(roots);
   }, [folders]);
