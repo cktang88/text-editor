@@ -10,7 +10,7 @@ export type User = {
 };
 
 export type Folder = {
-  id?: string;
+  _id?: string; //mongo native id
   name: string;
   parentId: string;
   createdAt: Number;
@@ -18,7 +18,7 @@ export type Folder = {
 };
 
 export type Pane = {
-  id?: string;
+  _id?: string; //mongo native id
   routeId: string;
   createdAt: Number;
   updatedAt: Number;
