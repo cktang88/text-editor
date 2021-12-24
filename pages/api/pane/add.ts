@@ -3,7 +3,7 @@ import { paneCollection } from "../../../db/collections";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   // TODO: sanitize + validate (maybe Zod?)
-  const { routeId, rawHTML, textContent } = req.body;
+  const { routeId, rawHTML, textContent } = JSON.parse(req.body);
   if (!routeId || !rawHTML || !textContent) {
     res.status(400).json({ error: "Invalid input format." });
     return;

@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { Treebeard, TreeNode, TreeTheme } from "react-treebeard";
+import { mutate } from "swr";
 import { Folder } from "../interfaces";
 import { useFolders } from "./hooks";
 
@@ -49,6 +50,8 @@ const FileBrowser = ({ setcurrentFolderId }) => {
     }
     setCursor(node);
     setcurrentFolderId(node.id);
+    // refresh panes listing
+    mutate("/api/pane/list");
     setData(Object.assign({}, data));
   };
   if (isLoading) {

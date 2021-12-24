@@ -3,7 +3,7 @@ import { folderCollection } from "../../../db/collections";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   // TODO: sanitize + validate (maybe Zod?)
-  const { name, parentId } = req.body;
+  const { name, parentId } = JSON.parse(req.body);
   if (!name) {
     res.status(400).json({ error: "Invalid input format." });
     return;
@@ -13,8 +13,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   const nowTs = Date.now();
   await col.insertOne({
-    name: name,
-    parentId: parentId,
+    name,
+    parentId,
     createdAt: nowTs,
     updatedAt: nowTs,
   });

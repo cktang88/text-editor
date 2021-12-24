@@ -1,8 +1,6 @@
 import useSWR from "swr";
 import { Folder, Pane } from "../../interfaces";
-
-// just wraps native fetch
-const fetcher = (...args: any[]) => fetch(...args).then((res) => res.json());
+import { fetcher } from "../util";
 
 export function usePanes() {
   const { data, error } = useSWR(`/api/pane/list`, fetcher);
