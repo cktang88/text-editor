@@ -13,12 +13,12 @@ const TreeView: FC<{
     <div>
       {data.map((node) => (
         <div>
+          <TreeNodeElem
+            node={node}
+            setAddingFolder={setAddingFolder}
+            onToggle={onToggle}
+          />
           <div style={{ paddingLeft: "24px" }}>
-            <TreeNodeElem
-              node={node}
-              setAddingFolder={setAddingFolder}
-              onToggle={onToggle}
-            />
             {node.children && (
               <TreeView
                 data={node.children}
