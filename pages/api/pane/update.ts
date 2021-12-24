@@ -13,6 +13,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   let updates = { updatedAt: Date.now(), rawHTML, textContent };
   if (routeId) {
+    console.log("updating route id");
     updates = { ...updates, routeId };
   }
   await col.findOneAndUpdate({ _id: new ObjectId(paneId) }, { $set: updates });

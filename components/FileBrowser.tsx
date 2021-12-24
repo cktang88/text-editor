@@ -1,12 +1,13 @@
-import { useMemo, useState } from "react";
+import { FC, useMemo, useState } from "react";
 import { Treebeard, TreeNode, TreeTheme } from "react-treebeard";
-import { mutate } from "swr";
 import { Folder } from "../interfaces";
 import { useFolders } from "./hooks";
 
 const INDENT = "20";
 
-const FileBrowser = ({ setcurrentFolderId }) => {
+const FileBrowser: FC<{ onFolderChange: (_: string) => void }> = ({
+  onFolderChange,
+}) => {
   // const [data, setData] = useState(rawData);
   const [cursor, setCursor] = useState<TreeNode>();
   const { folders, isLoading, isError } = useFolders();
@@ -49,9 +50,7 @@ const FileBrowser = ({ setcurrentFolderId }) => {
       node.toggled = toggled;
     }
     setCursor(node);
-    setcurrentFolderId(node.id);
-    // refresh panes listing
-    mutate("/api/pane/list");
+    onFolderChange(node.id);
     setData(Object.assign({}, data));
   };
   if (isLoading) {

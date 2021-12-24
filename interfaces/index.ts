@@ -13,15 +13,15 @@ export type Folder = {
   _id?: string; //mongo native id
   name: string;
   parentId: string;
-  createdAt: Number;
-  updatedAt: Number;
+  createdAt: number;
+  updatedAt: number;
 };
 
 export type Pane = {
   _id?: string; //mongo native id
   routeId: string;
-  createdAt: Number;
-  updatedAt: Number;
+  createdAt: number;
+  updatedAt: number;
   rawHTML: string;
   textContent: string;
 };
