@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Treebeard, TreeNode, TreeTheme } from "react-treebeard";
+import { Folder } from "../interfaces";
+import { useFolders } from "./hooks";
 
 const rawData = {
   name: "root",
@@ -11,7 +13,6 @@ const rawData = {
     },
     {
       name: "loading parent",
-      loading: true,
       children: [],
     },
     {
@@ -28,9 +29,29 @@ const rawData = {
   ],
 };
 
+const constructTree = (folders: Folder[]) => {
+  // creates a tree structure out of folder listings
+
+  // 1. add roots
+  let res = [];
+  const roots = folders
+    .filter((f) => !f.parentId)
+    .map((f) => ({ name: f.name, id: id, children: [] }));
+  res = roots;
+
+  folders.forEach((folder) => {
+    if (folder.parentId) {
+      // add to tree
+    } else {
+    }
+  });
+  return res;
+};
+
 const FileBrowser = () => {
   const [data, setData] = useState(rawData);
   const [cursor, setCursor] = useState<TreeNode>();
+  const { folders, loading, error } = useFolders();
 
   const onToggle = (node: TreeNode, toggled: boolean) => {
     if (cursor) {

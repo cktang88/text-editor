@@ -3,7 +3,7 @@ import Layout from "../components/Layout";
 import Tiptap from "../components/TipTap";
 import Split from "react-split";
 import FileBrowser from "../components/FileBrowser";
-import usePanes from "../components/hooks";
+import { usePanes } from "../components/hooks";
 
 const IndexPage = () => {
   const { panes, loading, error } = usePanes();
@@ -45,8 +45,8 @@ const IndexPage = () => {
         </Split>
       </div>
       <p>
-        <Link href="/about">
-          <a>About</a>
+        <Link href="/footer">
+          <a>Footer</a>
         </Link>
       </p>
     </Layout>

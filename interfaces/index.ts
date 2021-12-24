@@ -5,6 +5,23 @@
 // import { User } from 'path/to/interfaces';
 
 export type User = {
-  id: number
-  name: string
-}
+  id: number;
+  name: string;
+};
+
+export type Folder = {
+  id?: string;
+  name: string;
+  parentId: string;
+  createdAt: Number;
+  updatedAt: Number;
+};
+
+export type Pane = {
+  id?: string;
+  routeId: string;
+  createdAt: Number;
+  updatedAt: Number;
+  rawHTML: string;
+  textContent: string;
+};

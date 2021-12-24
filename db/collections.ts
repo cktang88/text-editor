@@ -1,6 +1,6 @@
 import { Collection } from "mongodb";
 import clientPromise from ".";
-import { Folder, Pane } from "./types";
+import { Folder, Pane } from "../interfaces";
 
 export const folderCollection = async () => {
   const client = await clientPromise;
