@@ -1,6 +1,9 @@
 import { FC, useEffect, useState } from "react";
 import { Folder } from "../interfaces";
 import { useFolders } from "./hooks";
+import { useHotkeys } from "react-hotkeys-hook";
+import TreeView from "./TreeView";
+import { mutate } from "swr";
 
 const FileBrowser: FC<{ onFolderChange: (_: string) => void }> = ({
   onFolderChange,
@@ -8,6 +11,12 @@ const FileBrowser: FC<{ onFolderChange: (_: string) => void }> = ({
   const [cursor, setCursor] = useState<TreeNode>();
   const { folders, isLoading, isError } = useFolders();
   const [data, setData] = useState<TreeNode[]>([]);
+
+  useHotkeys("ctrl+shift+", () => {
+    // new folder
+    console.log("new thing");
+  });
+
   useEffect(() => {
     // creates a tree structure out of folder listings
     const makeNode = (f: Folder, children: TreeNode[] = []) => ({
@@ -30,6 +39,10 @@ const FileBrowser: FC<{ onFolderChange: (_: string) => void }> = ({
     setData(roots);
   }, [folders]);
 
+  const refreshFolders = () => {
+    mutate("/api/folder/list", folders, true);
+  };
+
   const onToggle = (node: TreeNode, toggled: boolean) => {
     if (cursor) {
       cursor.active = false;
@@ -48,42 +61,12 @@ const FileBrowser: FC<{ onFolderChange: (_: string) => void }> = ({
     return <div>Error</div>;
   }
 
-  return <TreeView data={data} onToggle={onToggle} />;
-};
-
-const TreeView: FC<{
-  data: TreeNode[];
-  onToggle: (node: TreeNode, toggled: boolean) => void;
-}> = ({ data, onToggle }) => {
   return (
-    <div>
-      {data.map((node) => (
-        <div>
-          <div
-            style={{
-              fontWeight: node.active ? "bold" : "normal",
-              fontSize: node.active ? "1.2em" : "1.1em",
-              cursor: "default",
-              userSelect: "none",
-              margin: "5px",
-              border: "1px solid #ccc",
-            }}
-            onClick={(e) => onToggle(node, !node.active)}
-          >
-            {node.name}
-          </div>
-          {node.children && (
-            <div style={{ paddingLeft: "20px" }}>
-              <TreeView data={node.children} onToggle={onToggle} />
-            </div>
-          )}
-        </div>
-      ))}
-    </div>
+    <TreeView data={data} onToggle={onToggle} refreshFolders={refreshFolders} />
   );
 };
 
-type TreeNode = {
+export type TreeNode = {
   /** The component key. If not defined, an auto - generated index is used. */
   id?: string;
   /** The name prop passed into the Header component. */

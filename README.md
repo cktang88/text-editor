@@ -1,16 +1,13 @@
 # text-editor
 
-Libs:
+## Libs:
 
-- https://github.com/ueberdosis/tiptap core
+- [tiptap](https://github.com/ueberdosis/tiptap) core
 - https://github.com/nathancahill/split - for resizing
+- [react-hotkeys-hook](https://github.com/JohannesKlauss/react-hotkeys-hook) for hotkeys
 - Next.js 12 with TypeScript
-- SWR
-- MongoDB backend (possibly move to Supabase??)
-
-Extra stuff:
-
-- https://github.com/downshift-js/downshift for autocomplete?
+- [SWR](https://swr.vercel.app/)
+- MongoDB (possibly move to Supabase??)
 
 ## Spec
 
@@ -23,6 +20,7 @@ Extra stuff:
   - paste URLs, images
   - multiple panes
   - sync to db
+  - code blocks
 
 ## Todos
 
@@ -31,8 +29,9 @@ Extra stuff:
 - rename folder
 - move folders around
 - add folder search
+- move pane to another folder??
 - add full-text search
-- add better formatting?
+- add currently focused folder to URL state
 
 ## Thoughts
 
@@ -44,3 +43,4 @@ Extra stuff:
 - Mobile-friendly CSS:
   - need to be all one column in mobile, but be up to a row of 3 in desktop
   - Notes section needs to be on desktop all the time, but be collapsed/expandable in mobile.
+- backlinking to different panes, with autocomplete?

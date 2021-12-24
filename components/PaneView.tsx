@@ -43,7 +43,7 @@ const PaneView = ({ currentFolderId }: { currentFolderId: string | null }) => {
       minSize={250}
     >
       {filteredPanes.map((p) => (
-        <div style={padStyle}>
+        <div style={padStyle} key={p._id}>
           <PaneComponent paneData={p} />
         </div>
       ))}

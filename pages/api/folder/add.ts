@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
 import { folderCollection } from "../../../db/collections";
 
@@ -14,7 +15,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const nowTs = Date.now();
   await col.insertOne({
     name,
-    parentId,
+    parentId: new ObjectId(parentId),
     createdAt: nowTs,
     updatedAt: nowTs,
   });

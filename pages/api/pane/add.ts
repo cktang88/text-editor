@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
 import { paneCollection } from "../../../db/collections";
 
@@ -13,7 +14,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   const nowTs = Date.now();
   await col.insertOne({
-    routeId,
+    routeId: new ObjectId(routeId),
     createdAt: nowTs,
     updatedAt: nowTs,
     rawHTML,
