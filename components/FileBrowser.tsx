@@ -5,7 +5,7 @@ import { useFolders } from "./hooks";
 
 const INDENT = "20";
 
-const FileBrowser = () => {
+const FileBrowser = ({ setcurrentFolderId }) => {
   // const [data, setData] = useState(rawData);
   const [cursor, setCursor] = useState<TreeNode>();
   const { folders, isLoading, isError } = useFolders();
@@ -16,6 +16,7 @@ const FileBrowser = () => {
       name: f.name,
       id: f._id,
       children,
+      toggled: true,
     });
 
     // 1. add roots
@@ -47,6 +48,7 @@ const FileBrowser = () => {
       node.toggled = toggled;
     }
     setCursor(node);
+    setcurrentFolderId(node.id);
     setData(Object.assign({}, data));
   };
   if (isLoading) {
