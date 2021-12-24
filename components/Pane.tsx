@@ -42,6 +42,7 @@ const PaneComponent = ({ paneData }: { paneData: Pane }) => {
       console.log("no change, skipping sync.");
       return;
     }
+    console.log("syncing");
     // console.log(editor.getHTML(), rawHTML);
     await fetch(`/api/pane/update`, {
       method: "POST",
@@ -54,7 +55,6 @@ const PaneComponent = ({ paneData }: { paneData: Pane }) => {
   }, [editor]);
   useEffect(() => {
     const timer = setInterval(() => {
-      console.log("syncing");
       syncPane();
     }, SYNC_INTERVAL_MS);
     return function cleanup() {

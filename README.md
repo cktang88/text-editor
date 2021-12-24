@@ -5,7 +5,9 @@ Libs:
 - https://github.com/ueberdosis/tiptap core
 - react-treebeard --> TODO: need to replace lol
 - https://github.com/nathancahill/split - for resizing
-- Next.js 12 with TypeScript https://github.com/vercel/next.js/tree/canary/examples/with-typescript
+- Next.js 12 with TypeScript
+- SWR
+- MongoDB backend (possibly move to Supabase??)
 
 Extra stuff:
 
@@ -15,7 +17,7 @@ Extra stuff:
 
 - https://github.com/downshift-js/downshift for autocomplete?
 
-## NOTES
+## Spec
 
 - absolutely need full-text-search across all notes inner content, in addition to searching titles
 
@@ -28,6 +30,10 @@ Extra stuff:
   - preferably hide taskbar, one master taskbar + popups?
   - paste images
   - sync to a db somewhere
+
+## Thoughts
+
+- all remote images usually cached, even though they keep attempting to refetch on HTML load, so in practice very efficient
 
 ## v2
 
