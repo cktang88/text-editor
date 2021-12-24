@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Layout from "../components/Layout";
-import FileBrowser from "../components/FileBrowser";
+import FileBrowser from "../components/filebrowser/FileBrowser";
 import { useEffect, useState } from "react";
 import PaneView from "../components/PaneView";
 import { mutate } from "swr";

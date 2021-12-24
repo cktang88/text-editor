@@ -3,16 +3,6 @@ import Split from "react-split";
 import { usePanes } from "../components/hooks";
 import { useMemo } from "react";
 
-const padStyle = {
-  // margin: 10,
-  margin: 0,
-  minWidth: 300,
-  // width: "680px",
-  // padding: 20,
-  // border: "1px solid #ccc",
-  // minHeight: "50%",
-};
-
 const PaneView = ({ currentFolderId }: { currentFolderId: string | null }) => {
   const { panes, isLoading, isError } = usePanes();
 
@@ -49,6 +39,16 @@ const PaneView = ({ currentFolderId }: { currentFolderId: string | null }) => {
       ))}
     </Split>
   );
+};
+
+const padStyle = {
+  // margin: 10,
+  margin: 0,
+  minWidth: 300,
+  // width: "680px",
+  // padding: 20,
+  // border: "1px solid #ccc",
+  // minHeight: "50%",
 };
 
 export default PaneView;

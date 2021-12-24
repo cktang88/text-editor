@@ -25,7 +25,6 @@
 ## Todos
 
 - add pane
-- add folder
 - rename folder
 - move folders around
 - add folder search
