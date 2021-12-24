@@ -1,18 +1,14 @@
-import { FC, useMemo, useState } from "react";
-import { Treebeard, TreeNode, TreeTheme } from "react-treebeard";
+import { FC, useEffect, useState } from "react";
 import { Folder } from "../interfaces";
 import { useFolders } from "./hooks";
-
-const INDENT = "20";
 
 const FileBrowser: FC<{ onFolderChange: (_: string) => void }> = ({
   onFolderChange,
 }) => {
-  // const [data, setData] = useState(rawData);
   const [cursor, setCursor] = useState<TreeNode>();
   const { folders, isLoading, isError } = useFolders();
-  const [data, setData] = useState({});
-  useMemo(() => {
+  const [data, setData] = useState<TreeNode[]>([]);
+  useEffect(() => {
     // creates a tree structure out of folder listings
     const makeNode = (f: Folder, children: TreeNode[] = []) => ({
       name: f.name,
@@ -31,14 +27,7 @@ const FileBrowser: FC<{ onFolderChange: (_: string) => void }> = ({
           .map((e) => makeNode(e));
         return makeNode(f, children);
       });
-    let res = {
-      name: "root",
-      toggled: true,
-      children: roots,
-    };
-    setData(res);
-
-    return res;
+    setData(roots);
   }, [folders]);
 
   const onToggle = (node: TreeNode, toggled: boolean) => {
@@ -51,7 +40,6 @@ const FileBrowser: FC<{ onFolderChange: (_: string) => void }> = ({
     }
     setCursor(node);
     onFolderChange(node.id);
-    setData(Object.assign({}, data));
   };
   if (isLoading) {
     return <div>Loading</div>;
@@ -60,118 +48,54 @@ const FileBrowser: FC<{ onFolderChange: (_: string) => void }> = ({
     return <div>Error</div>;
   }
 
+  return <TreeView data={data} onToggle={onToggle} />;
+};
+
+const TreeView: FC<{
+  data: TreeNode[];
+  onToggle: (node: TreeNode, toggled: boolean) => void;
+}> = ({ data, onToggle }) => {
   return (
-    <Treebeard
-      data={data}
-      onToggle={onToggle}
-      animations={false} // turn off animations for faster responsiveness
-      style={styleOverride}
-    />
+    <div>
+      {data.map((node) => (
+        <div>
+          <div
+            style={{
+              fontWeight: node.active ? "bold" : "normal",
+              fontSize: node.active ? "1.2em" : "1.1em",
+              cursor: "default",
+              userSelect: "none",
+              margin: "5px",
+              border: "1px solid #ccc",
+            }}
+            onClick={(e) => onToggle(node, !node.active)}
+          >
+            {node.name}
+          </div>
+          {node.children && (
+            <div style={{ paddingLeft: "20px" }}>
+              <TreeView data={node.children} onToggle={onToggle} />
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
   );
 };
 
-const styleOverride: TreeTheme = {
-  tree: {
-    base: {
-      listStyle: "none",
-      backgroundColor: "white",
-      margin: 0,
-      padding: 0,
-      color: "black",
-      fontFamily: "lucida grande ,tahoma,verdana,arial,sans-serif",
-      fontSize: "14px",
-    },
-    node: {
-      base: {
-        position: "relative",
-      },
-      link: {
-        cursor: "pointer",
-        position: "relative",
-        // padding: `0px ${INDENT}px`,
-        display: "block",
-      },
-      activeLink: {
-        background: "#cae2eb",
-      },
-      toggle: {
-        base: {
-          position: "relative",
-          display: "inline-block",
-          verticalAlign: "top",
-          //   marginLeft: `-${INDENT}px`,
-          height: "24px",
-          width: "24px",
-        },
-        wrapper: {
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          margin: "-7px 0 0 -7px",
-          height: "14px",
-        },
-        height: 14,
-        width: 14,
-        arrow: {
-          fill: "black",
-          strokeWidth: 0,
-        },
-      },
-      header: {
-        base: {
-          display: "inline-block",
-          verticalAlign: "top",
-          color: "black",
-        },
-        connector: {
-          width: "2px",
-          height: "12px",
-          borderLeft: "solid 2px black",
-          borderBottom: "solid 2px black",
-          position: "absolute",
-          top: "0px",
-          left: "-21px",
-        },
-        title: {
-          lineHeight: "24px",
-          verticalAlign: "middle",
-        },
-      },
-      subtree: {
-        listStyle: "none",
-        paddingLeft: `${INDENT}px`,
-      },
-      loading: {
-        color: "#36ab16",
-      },
-    },
-  },
+type TreeNode = {
+  /** The component key. If not defined, an auto - generated index is used. */
+  id?: string;
+  /** The name prop passed into the Header component. */
+  name: string;
+  /** The children attached to the node. This value populates the subtree at the specific node.Each child is built from the same basic data structure.
+   *
+   * Tip: Make this an empty array, if you want to asynchronously load a potential parent. */
+  children?: Array<TreeNode>;
+  /** Toggled flag. Sets the visibility of a node's children. It also sets the state for the toggle decorator. */
+  toggled?: boolean;
+  /** Active flag. If active, the node will be highlighted.The highlight is derived from the node.activeLink style object in the theme. */
+  active?: boolean;
 };
 
 export default FileBrowser;
-
-// const rawData = {
-//   name: "root",
-//   toggled: true,
-//   children: [
-//     {
-//       name: "parent",
-//       children: [{ name: "child1" }, { name: "child2" }],
-//     },
-//     {
-//       name: "loading parent",
-//       children: [],
-//     },
-//     {
-//       name: "parent",
-//       children: [
-//         {
-//           name: "nested parent",
-//           children: [{ name: "nested child 1" }, { name: "nested child 2" }],
-//         },
-//         { name: "child 1a" },
-//         { name: "child 1b" },
-//       ],
-//     },
-//   ],
-// };

@@ -19,7 +19,7 @@ const IndexPage = () => {
   return (
     <Layout title="Text Editor">
       <div style={{ display: "flex", marginRight: 50 }}>
-        <div style={{ margin: "20px", width: "300px" }}>
+        <div style={{ margin: "20px", minWidth: "300px" }}>
           <h2>text editor</h2>
           <FileBrowser
             onFolderChange={(folderId) => {

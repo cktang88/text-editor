@@ -3,7 +3,6 @@
 Libs:
 
 - https://github.com/ueberdosis/tiptap core
-- react-treebeard --> TODO: need to replace lol
 - https://github.com/nathancahill/split - for resizing
 - Next.js 12 with TypeScript
 - SWR
@@ -29,8 +28,9 @@ Extra stuff:
 
 - add pane
 - add folder
+- rename folder
 - move folders around
-- fix folder display
+- add folder search
 - add full-text search
 - add better formatting?
 
