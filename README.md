@@ -1,5 +1,7 @@
 # text-editor
 
+TODO: update to tiptap v2, switch to Vite + React + TS starter, switch SWR --> React query
+
 ## Libs:
 
 - [tiptap](https://github.com/ueberdosis/tiptap) core
